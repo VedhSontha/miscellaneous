@@ -65,3 +65,15 @@ pip install pyrealsense2
 
 ## 📄 License
 This repository is configured for personal portfolio and reference use. Distributed under the MIT License.
+
+---
+
+## 📊 Repository Insights
+
+| Metric | Details |
+| :--- | :--- |
+| **Total Consolidated Files** | 29 Files |
+| **Jupyter Notebooks (`.ipynb`)** | 22 Notebooks |
+| **Python Scripts (`.py`)** | 7 Scripts |
+| **Last Maintenance Check** | June 8, 2026 |
+| **Status** | Fully Structured & Indexed |
