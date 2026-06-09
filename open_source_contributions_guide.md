@@ -80,3 +80,14 @@ When you open a new chat session to start your contribution, paste the following
 > 4. We will prepare the Pull Request.
 > 
 > Let's start by looking at candidate issues or cloning the repository!"*
+
+---
+
+## 📝 Git Commit Message Best Practices (Conventional Commits)
+When submitting Pull Requests, keep your commits tidy and use Conventional Commits formatting:
+- **`feat: ...`** — For new features or additions (e.g., `feat: add padding parameter to elastic transform`).
+- **`fix: ...`** — For bug fixes (e.g., `fix: resolve division by zero in loss computation`).
+- **`docs: ...`** — For documentation changes (e.g., `docs: update setup instructions in README`).
+- **`test: ...`** — For adding or correcting tests (e.g., `test: add unit tests for ResNet block`).
+- **`refactor: ...`** — For refactoring code that doesn't change behavior (e.g., `refactor: clean up loop in dataloader`).
+
