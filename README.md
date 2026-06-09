@@ -61,6 +61,12 @@ For RealSense cameras:
 pip install pyrealsense2
 ```
 
+> [!TIP]
+> **RealSense Setup & Troubleshooting:**
+> 1. **USB Interface:** Ensure the camera is plugged into a USB 3.0 (blue) port. Intel RealSense depth cameras (e.g., D435i) require the USB 3.0 bandwidth for depth streams; using USB 2.0 will limit resolution or cause pipeline start failures.
+> 2. **OS drivers:** On Windows, the camera should be auto-detected, but you can install the Intel RealSense Viewer to verify hardware connection and update device firmware.
+> 3. **Python Version Compatibility:** `pyrealsense2` binary wheels are occasionally sensitive to new Python releases. If installation fails, verify compatibility with your python environment version.
+
 ---
 
 ## 📄 License
