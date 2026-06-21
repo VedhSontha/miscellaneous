@@ -16,7 +16,7 @@ A consolidated repository of miscellaneous Python scripts, helper modules, and J
 Notebooks covering fundamental neural architectures, transformer mechanisms, and large language model concepts:
 * **`Multi_head_attention.ipynb`** — Custom implementation of Multi-Head Attention mechanisms from scratch.
 * **`PRE_LLM_concepts.ipynb`** — Foundational concepts leading up to LLM architectures.
-* **`RAG_implementaion(trial).ipynb`** — A trial workflow for Retrieval-Augmented Generation (RAG).
+* **`RAG_implementation(trial).ipynb`** — A trial workflow for Retrieval-Augmented Generation (RAG).
 * **`CNN.3.ipynb`** — Convolutional Neural Networks (CNN) modeling and experiments.
 * **`RNN.2.ipynb`** — Recurrent Neural Networks (RNN) and sequence modeling.
 * **`linear_regression.ipynb`** — Basic linear regression implementation.
