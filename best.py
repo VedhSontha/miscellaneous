@@ -1,5 +1,6 @@
 import cv2
 import os
+import sys
 import subprocess
 import shutil
 import open3d as o3d
@@ -26,7 +27,7 @@ print(f"[INFO] Webcam live. Press 's' to start auto-capture of {num_images} imag
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("[ERROR] Webcam could not be opened.")
-    exit()
+    sys.exit()
 
 count = 0
 capture_started = False
@@ -69,7 +70,7 @@ while True:
         print("[INFO] Quit by user.")
         cap.release()
         cv2.destroyAllWindows()
-        exit()
+        sys.exit()
 
 cap.release()
 cv2.destroyAllWindows()
@@ -78,7 +79,7 @@ cv2.destroyAllWindows()
 actual_images = len(os.listdir(image_dir))
 if actual_images < 10:
     print(f"[❌] Only {actual_images} images captured. Need at least 10.")
-    exit()
+    sys.exit()
 
 # === COLMAP PATHS ===
 database_path = os.path.join(output_dir, "database.db")
@@ -145,7 +146,7 @@ try:
     print(f"[✅] Point cloud saved to: {fused_ply}")
 except subprocess.CalledProcessError as e:
     print(f"[❌] COLMAP failed: {e}")
-    exit()
+    sys.exit()
 
 # === VISUALIZE RESULT ===
 if os.path.exists(fused_ply):
