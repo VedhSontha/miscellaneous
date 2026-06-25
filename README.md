@@ -38,6 +38,18 @@ A collection of notebooks tracking progress across weekly coursework and assignm
 * **`Week10.ipynb`** — Final-stage coursework tasks and evaluations.
 * **`Hack.ipynb`** — Quick hackathon experiments, prototyping, and draft calculations.
 
+### 4. 📐 Webcam COLMAP 3D Reconstruction Pipeline
+* **`best.py`** — A complete automated script to capture calibration images from a webcam feed and run the entire COLMAP 3D reconstruction pipeline:
+  1. **Webcam Capture:** Spawns a camera window. Press `s` to auto-capture a preset sequence of frames.
+  2. **COLMAP Pipeline:** Runs feature extraction, exhaustive matching, sparse mapping, image undistortion, patch-match stereo, and stereo depth map fusion.
+  3. **3D Visualization:** Reads the generated `fused.ply` point cloud and visualizes the scene in 3D using Open3D.
+  
+  Run it using:
+  ```bash
+  python best.py
+  ```
+  *(Note: Requires the COLMAP binary executable to be installed and path configured in the script config)*
+
 ---
 
 ## 🛠️ Requirements & Setup
