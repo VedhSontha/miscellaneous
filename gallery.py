@@ -69,10 +69,17 @@ cv2.namedWindow("Capture Person")
 cv2.setMouseCallback("Capture Person", click_event)
 
 frame_id = 0
+consecutive_failures = 0
 while cap.isOpened() and count < MAX_IMAGES:
     ret, frame = cap.read()
     if not ret:
-        break
+        consecutive_failures += 1
+        if consecutive_failures > 30:
+            print("ERROR: Camera disconnected or failed repeatedly.")
+            break
+        time.sleep(0.03)
+        continue
+    consecutive_failures = 0
 
     frame_id += 1
     if frame_id % FRAME_SKIP != 0:
