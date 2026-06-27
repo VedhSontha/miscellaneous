@@ -69,6 +69,7 @@ try:
     while cap.isOpened():
         success, image = cap.read()
         if not success:
+            time.sleep(0.03) # Prevent CPU thrashing if camera is busy or disconnected
             continue
 
         image = cv2.flip(image, 1)
