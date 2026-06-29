@@ -595,6 +595,22 @@ def preview_thread():
 # Main
 # ─────────────────────────────────────────────────────────────────────────────
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="RealSense D435i IMU-fused Point Cloud v6")
+    parser.add_argument("--output", "-o", default="scan.ply", help="Output file path (default: scan.ply)")
+    parser.add_argument("--decimate", "-d", type=int, default=2, help="Decimation factor (default: 2)")
+    parser.add_argument("--voxel", "-v", type=float, default=0.012, help="TSDF voxel length in meters (default: 0.012)")
+    parser.add_argument("--max-depth", "-z", type=float, dest="max_depth", default=2.0, help="Maximum depth truncation range in meters (default: 2.0)")
+
+    args = parser.parse_args()
+
+    global OUTPUT_FILE, DECIMATE, VOXEL_LENGTH, DEPTH_TRUNC, SDF_TRUNC
+    OUTPUT_FILE = args.output
+    DECIMATE = args.decimate
+    VOXEL_LENGTH = args.voxel
+    DEPTH_TRUNC = args.max_depth
+    SDF_TRUNC = 4.0 * VOXEL_LENGTH
+
     # GPU info
     print(f"Open3D: {o3d.__version__}  |  Device: {DEVICE}")
 
