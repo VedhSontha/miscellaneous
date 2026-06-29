@@ -28,6 +28,10 @@ mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(max_num_hands=2, min_detection_confidence=0.7, min_tracking_confidence=0.7)
 mp_drawing = mp.solutions.drawing_utils
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    import sys
+    print("ERROR: Web camera could not be opened. Verify camera connection.")
+    sys.exit(1)
 
 keys_pressed = set()
 last_speed_command_time = 0
@@ -59,7 +63,7 @@ def is_fist(hand_landmarks):
             ring_tip_y > ring_pip_y + FIST_DETECTION_OFFSET and
             pinky_tip_y > pinky_pip_y + FIST_DETECTION_OFFSET):
             return True
-    except:
+    except Exception:
         return False
     return False
 
