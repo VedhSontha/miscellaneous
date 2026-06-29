@@ -87,21 +87,22 @@ dense_path = os.path.join(output_dir, "dense")
 fused_ply = os.path.join(dense_path, "fused.ply")
 
 # === COLMAP PIPELINE ===
-def run_colmap():
-    print("[INFO] Running feature extraction...")
+def run_colmap(use_gpu=True):
+    gpu_flag = "1" if use_gpu else "0"
+    print(f"[INFO] Running feature extraction (GPU={gpu_flag})...")
     subprocess.run([
         colmap_bin, "feature_extractor",
         "--database_path", database_path,
         "--image_path", image_dir,
         "--ImageReader.single_camera", "1",
-        "--SiftExtraction.use_gpu", "1"
+        "--SiftExtraction.use_gpu", gpu_flag
     ], check=True)
 
-    print("[INFO] Matching features...")
+    print(f"[INFO] Matching features (GPU={gpu_flag})...")
     subprocess.run([
         colmap_bin, "exhaustive_matcher",
         "--database_path", database_path,
-        "--SiftMatching.use_gpu", "1"
+        "--SiftMatching.use_gpu", gpu_flag
     ], check=True)
 
     print("[INFO] Building sparse map...")
@@ -124,6 +125,7 @@ def run_colmap():
     ], check=True)
 
     print("[INFO] Running dense stereo...")
+    # Note: patch_match_stereo requires CUDA; will fail on CPU-only.
     subprocess.run([
         colmap_bin, "patch_match_stereo",
         "--workspace_path", dense_path,
@@ -141,11 +143,23 @@ def run_colmap():
     ], check=True)
 
 try:
-    run_colmap()
+    run_colmap(use_gpu=True)
     print(f"[✅] Point cloud saved to: {fused_ply}")
 except subprocess.CalledProcessError as e:
-    print(f"[❌] COLMAP failed: {e}")
-    exit()
+    print(f"[⚠️] COLMAP failed with GPU support: {e}. Retrying with GPU disabled for feature extraction/matching...")
+    if os.path.exists(database_path):
+        try:
+            os.remove(database_path)
+        except OSError:
+            pass
+    if os.path.exists(sparse_path):
+        shutil.rmtree(sparse_path, ignore_errors=True)
+    try:
+        run_colmap(use_gpu=False)
+        print(f"[✅] Point cloud saved to: {fused_ply}")
+    except subprocess.CalledProcessError as err:
+        print(f"[❌] COLMAP failed: {err}")
+        exit()
 
 # === VISUALIZE RESULT ===
 if os.path.exists(fused_ply):
