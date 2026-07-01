@@ -1,3 +1,4 @@
+import sys
 import cv2
 import torch
 import numpy as np
@@ -65,6 +66,10 @@ def click_event(event, x, y, flags, param):
                 break
 
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("ERROR: Could not open web camera. Verify camera connection.")
+    sys.exit(1)
+
 cv2.namedWindow("Capture Person")
 cv2.setMouseCallback("Capture Person", click_event)
 
